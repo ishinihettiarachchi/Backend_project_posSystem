@@ -1,10 +1,5 @@
 package com.practicespringboot.pointofsale.DTO;
 
-import jakarta.persistence.Column;
-import org.hibernate.annotations.Type;
-
-import java.util.ArrayList;
-
 public class CustomerDTO {
 
     private int customerId;
@@ -13,6 +8,10 @@ public class CustomerDTO {
     private double customerSalary;
     private String nic;
     private boolean activeState;
+
+    public CustomerDTO() {
+    }
+
 
     public int getCustomerId() {
         return customerId;
