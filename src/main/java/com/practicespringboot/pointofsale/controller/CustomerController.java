@@ -19,7 +19,7 @@ public class CustomerController {
     @PostMapping(path="/save")
     public String saveCustomer(@RequestBody CustomerDTO customerDTO){
         customerService.saveCustomer(customerDTO);
-        return "Ishini";
+        return "saved";
     }
 
     @PutMapping(path = "/update")
@@ -37,7 +37,7 @@ public class CustomerController {
         return customerDTO;
     }
 
-    @GetMapping(path = "get-all-customers")
+    @GetMapping(path = "/get-all-customers")
     public List<CustomerDTO> getAllCustomers(){
         List<CustomerDTO> allCustomer = customerService.getAllCustomers();
         return allCustomer;
@@ -48,4 +48,22 @@ public class CustomerController {
         String deleted = customerService.deleteCustomer(customerId);
         return deleted;
     }
+
+    @GetMapping(
+            path = "/get-by-nic",
+            params = "nic"
+    )
+    public CustomerDTO getCustomerByNic(@RequestParam(value = "nic") String nic){
+        CustomerDTO customerDTO = customerService.getCustomerByNic(nic);
+        return customerDTO;
+
+    }
+
+    @GetMapping(path = "/get-all-customers/{status}")
+    public List<CustomerDTO> getAllCustomers(@PathVariable(value = "status") boolean status){
+        List<CustomerDTO> allCustomer = customerService.getAllCustomersByStatus(status);
+        return allCustomer;
+    }
+
+
 }

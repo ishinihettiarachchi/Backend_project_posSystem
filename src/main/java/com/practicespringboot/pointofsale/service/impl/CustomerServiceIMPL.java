@@ -125,5 +125,43 @@ public class CustomerServiceIMPL implements CustomerService {
 
     }
 
+    @Override
+    public CustomerDTO getCustomerByNic(String nic) {
+        Optional<Customer> customer = customerRepo.findByNicEquals(nic);
+        if (customer.isPresent()) {
+           CustomerDTO customerDTO = new CustomerDTO(
+                   customer.get().getCustomerId(),
+                   customer.get().getCustomerName(),
+                    customer.get().getCustomerAddress(),
+                    customer.get().getCustomerSalary(),
+                    customer.get().getNic(),
+                    customer.get().isActiveState()
+           );
+
+            return customerDTO;
+        } else {
+            throw new RuntimeException("Customer not found for that id " + nic);
+        }
+    }
+
+    @Override
+    public List<CustomerDTO> getAllCustomersByStatus(boolean status) {
+        List<Customer> getCustomer = customerRepo.findAllByActiveState(status);
+        List<CustomerDTO> customerDTOList = new ArrayList<>();
+        for (Customer customer : getCustomer){
+            CustomerDTO customerDTO = new CustomerDTO();
+            customerDTO.setCustomerId(customer.getCustomerId());
+            customerDTO.setCustomerName(customer.getCustomerName());
+            customerDTO.setCustomerAddress(customer.getCustomerAddress());
+            customerDTO.setCustomerSalary(customer.getCustomerSalary());
+            customerDTO.setNic(customer.getNic());
+            customerDTO.setActiveState(customer.isActiveState());
+
+            customerDTOList.add(customerDTO);
+        }
+        return customerDTOList ;
+    }
+
+
 }
 

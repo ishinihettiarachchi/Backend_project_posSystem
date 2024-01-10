@@ -12,6 +12,14 @@ public class CustomerDTO {
     public CustomerDTO() {
     }
 
+    public CustomerDTO(int customerId, String customerName, String customerAddress, double customerSalary, String nic, boolean activeState) {
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.customerAddress = customerAddress;
+        this.customerSalary = customerSalary;
+        this.nic = nic;
+        this.activeState = activeState;
+    }
 
     public int getCustomerId() {
         return customerId;
